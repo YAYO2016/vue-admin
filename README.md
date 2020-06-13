@@ -1,24 +1,16 @@
-# vue-admin
+vue-admin的后台管理项目
 
-## Project setup
-```
-npm install
-```
+npm i element-ui -S
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+npm i sass-resources-loader -D
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+
+
+
+
+
+
