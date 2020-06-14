@@ -13,6 +13,9 @@ const zh = {
   },
   register: {
     title: "注册"
+  },
+  rules: {
+    noEmpty: "输入不能为空"
   }
 };
 

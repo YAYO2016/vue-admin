@@ -13,6 +13,9 @@ const en = {
   },
   register: {
     title: "register"
+  },
+  rules: {
+    noEmpty: "input should not empty"
   }
 };
 

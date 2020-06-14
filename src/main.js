@@ -11,7 +11,7 @@ import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import locale from "element-ui/lib/locale/lang/en";
 
-import i18n from "./i18n";
+import i18n from "@/i18n";
 Vue.use(ElementUI, { size: "small", locale });
 
 //在全局注册一些自定义方法

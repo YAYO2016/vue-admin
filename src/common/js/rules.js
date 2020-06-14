@@ -1,7 +1,17 @@
+import i18n from "@/i18n";
+
 //非空校验
-const NotEmpty = [
-  { required: true, message: "输入不能为空", trigger: ["blur", "change"] }
-];
+//在单独js文件Vue template以外应用，先在js内引入i18n.js，然后通过函数的模式返回数据，务必使用函数返回的模式，因为使用一般属性对象，在编译一次后，后面更改语言，不会自动刷新
+//const NotEmpty = [{ required: true, message: i18n.t("rules.noEmpty"), trigger: ["blur", "change"] }];
+const NotEmpty = () => {
+  return [
+    {
+      required: true,
+      message: i18n.t("rules.noEmpty"),
+      trigger: ["blur", "change"]
+    }
+  ];
+};
 const TypeEmpty = [
   { required: true, message: "输入不能为空", trigger: ["blur"] }
 ];
