@@ -1,18 +1,23 @@
 <template>
   <div class="Login">
+    <el-row :gutter="10" class="changeLanguage">
+      <el-col :span="24" align="right">
+        <el-button type="primary" @click="changeLocale">中文/EN</el-button>
+      </el-col>
+    </el-row>
     <div class="login-wrap">
       <ul class="menu-tab">
         <li
           @click="defaultTab = 'login'"
           :class="{ active: defaultTab === 'login' }"
         >
-          登录
+          {{ $t("login.title") }}
         </li>
         <li
           @click="defaultTab = 'register'"
           :class="{ active: defaultTab === 'register' }"
         >
-          注册
+          {{ $t("register.title") }}
         </li>
       </ul>
       <br />
@@ -25,12 +30,12 @@
           :model="loginForm"
           label-width="0"
         >
-          <el-form-item prop="username" :rules="$rules.EmailRule">
-            <label>邮箱</label>
+          <el-form-item prop="email" :rules="$rules.EmailRule">
+            <label> {{ $t("login.email") }}</label>
             <el-input type="email" v-model.trim="loginForm.email"></el-input>
           </el-form-item>
           <el-form-item prop="password" :rules="$rules.PasswordRule">
-            <label>密码</label>
+            <label> {{ $t("login.password") }}</label>
             <el-input
               type="password"
               minlength="6"
@@ -43,7 +48,7 @@
             prop="code"
             :rules="[{ ...$rules.NotEmpty[0], message: '验证码不能为空' }]"
           >
-            <label>验证码</label>
+            <label> {{ $t("login.code") }}</label>
             <el-row :gutter="10" type="flex" justify="space-between">
               <el-col :span="16">
                 <el-input
@@ -53,8 +58,8 @@
                 ></el-input>
               </el-col>
               <el-col :span="8">
-                <el-button type="success" style="width: 100%"
-                  >获取验证码</el-button
+                <el-button type="success" style="width: 100%">
+                  {{ $t("login.getCode") }}</el-button
                 >
               </el-col>
             </el-row>
@@ -65,7 +70,8 @@
               type="danger"
               style="width: 100%"
               @click="handleLogin('loginForm')"
-              >提交</el-button
+            >
+              {{ $t("login.submit") }}</el-button
             >
           </el-form-item>
         </el-form>
@@ -109,6 +115,12 @@ export default {
     };
   },
   methods: {
+    //中英文切换
+    changeLocale() {
+      let vm = this;
+      let locale = vm.$i18n.locale;
+      locale === "zh" ? (vm.$i18n.locale = "en") : (vm.$i18n.locale = "zh");
+    },
     handleLogin(formName) {
       let vm = this;
       if (vm.validateRules(formName, vm)) {
@@ -124,6 +136,10 @@ export default {
   position: relative;
   height: 100%;
   background-color: #344a5f;
+
+  .changeLanguage {
+    padding: 10px;
+  }
 
   .login-wrap {
     width: 330px;
