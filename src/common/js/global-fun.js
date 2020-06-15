@@ -93,6 +93,18 @@ const install = function(Vue, options) {
     return itemNum.substring(0, itemNum.indexOf("."));
   };
 
+  // 过滤特殊字符
+  Vue.prototype.stripscript = string => {
+    let pattern = new RegExp(
+      "[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）&mdash;—|{}【】‘；：”“'。，、？]"
+    );
+    let result = "";
+    for (let i = 0; i < string.length; i++) {
+      result = result + string.substr(i, 1).replace(pattern, "");
+    }
+    return result;
+  };
+
   Vue.prototype.validateRules = (formName, _this) => {
     let result = "";
     _this.$refs[formName].validate(valid => {

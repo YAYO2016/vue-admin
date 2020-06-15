@@ -26,6 +26,7 @@ const PasswordRule = [
   { min: 6, max: 20, message: "长度在2-30个字符之间", trigger: "blur" },
   {
     validator: function(rule, value, callback) {
+      //字母+数字
       if (/^(?!\D+$)(?![^a-zA-Z]+$)\S{6,20}$/.test(value) == false) {
         callback(new Error("密码为6至20位字母+数字"));
       } else {
@@ -96,7 +97,7 @@ const codeRules = [
   },
   {
     validator: function(rule, value, callback) {
-      // 排除特殊字符
+      // 字母或者数字
       if (/^[a-z0-9]{6}$/.test(value) == false) {
         callback(new Error("验证码格式有误"));
       } else {
