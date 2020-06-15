@@ -96,7 +96,7 @@ const install = function(Vue, options) {
   // 过滤特殊字符
   Vue.prototype.stripscript = string => {
     let pattern = new RegExp(
-      "[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）&mdash;—|{}【】‘；：”“'。，、？]"
+      "[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）&;—|{ }【】‘；：”“'。，、？]"
     );
     let result = "";
     for (let i = 0; i < string.length; i++) {

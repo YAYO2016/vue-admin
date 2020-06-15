@@ -25,7 +25,7 @@
       <div class="form">
         <!--登录表单-->
         <el-form
-          v-if="defaultTab === 'login'"
+          v-show="defaultTab === 'login'"
           ref="loginForm"
           :model="loginForm"
           label-width="0"
@@ -37,11 +37,13 @@
           <el-form-item prop="password" :rules="$rules.PasswordRule">
             <label> {{ $t("login.password") }}</label>
             <el-input
-              type="password"
+              type="text"
               minlength="6"
               maxlength="20"
+              @blur="loginForm.password = stripscript(loginForm.password)"
               v-model.trim="loginForm.password"
             ></el-input>
+            <!--stripscript 可以消除特殊的字符-->
           </el-form-item>
 
           <el-form-item
@@ -78,14 +80,80 @@
 
         <!--注册表单-->
         <el-form
-          v-if="defaultTab === 'register'"
+          v-show="defaultTab === 'register'"
           ref="registerForm"
           :model="registerForm"
-          label-width="80px"
+          label-width="0"
         >
+          <el-form-item prop="email" :rules="$rules.NotEmpty()">
+            <label> {{ $t("register.email") }}</label>
+            <el-input type="email" v-model.trim="registerForm.email"></el-input>
+          </el-form-item>
+          <el-form-item prop="password" :rules="$rules.PasswordRule">
+            <label> {{ $t("register.password") }}</label>
+            <el-input
+              type="text"
+              minlength="6"
+              maxlength="20"
+              @blur="registerForm.password = stripscript(registerForm.password)"
+              v-model.trim="registerForm.password"
+            ></el-input>
+            <!--stripscript 可以消除特殊的字符-->
+          </el-form-item>
+
+          <el-form-item
+            prop="repeatPassword"
+            :rules="
+              (() => [
+                ...$rules.PasswordRule,
+                { validator: validatePassWord, trigger: 'blur' }
+              ])()
+            "
+          >
+            <label> {{ $t("register.repeatPassword") }}</label>
+            <el-input
+              type="text"
+              minlength="6"
+              maxlength="20"
+              @blur="
+                registerForm.repeatPassword = stripscript(
+                  registerForm.repeatPassword
+                )
+              "
+              v-model.trim="registerForm.repeatPassword"
+            ></el-input>
+            <!--stripscript 可以消除特殊的字符-->
+          </el-form-item>
+
+          <el-form-item
+            prop="code"
+            :rules="[{ ...$rules.NotEmpty[0], message: '验证码不能为空' }]"
+          >
+            <label> {{ $t("login.code") }}</label>
+            <el-row :gutter="10" type="flex" justify="space-between">
+              <el-col :span="16">
+                <el-input
+                  v-model.trim="registerForm.code"
+                  minlength="6"
+                  maxlength="6"
+                ></el-input>
+              </el-col>
+              <el-col :span="8">
+                <el-button type="success" style="width: 100%">
+                  {{ $t("login.getCode") }}</el-button
+                >
+              </el-col>
+            </el-row>
+          </el-form-item>
+
           <el-form-item>
-            <label>邮箱</label>
-            <el-input v-model="registerForm.email"></el-input>
+            <el-button
+              type="danger"
+              style="width: 100%"
+              @click="handleLogin('loginForm')"
+            >
+              {{ $t("login.submit") }}</el-button
+            >
           </el-form-item>
         </el-form>
       </div>
@@ -101,6 +169,14 @@
 export default {
   name: "Login",
   data() {
+    //两次输入的密码一致校验
+    const validatePassWord = (rule, value, callback) => {
+      if (value !== this.registerForm.password) {
+        callback(new Error(this.$t("rules.repeatPasswordError")));
+      } else {
+        callback();
+      }
+    };
     return {
       defaultTab: "login",
       loginForm: {
@@ -110,8 +186,11 @@ export default {
       },
       registerForm: {
         email: "",
-        password: ""
-      }
+        password: "",
+        repeatPassword: "",
+        code: ""
+      },
+      validatePassWord: validatePassWord
     };
   },
   computed: {},
@@ -134,13 +213,24 @@ export default {
     "$i18n.locale": {
       handler() {
         //在下次dom更新循环结束之后，执行延迟回调。在修改数据之后立即使用这个方法，获得更新后的dom
-        this.$nextTick(() => {
-          this.$refs["loginForm"].fields.forEach(item => {
-            if (item.validateState === "error") {
-              this.$refs["loginForm"].validateField(item.labelFor);
-            }
+        if (this.$refs["loginForm"]) {
+          this.$nextTick(() => {
+            this.$refs["loginForm"].fields.forEach(item => {
+              if (item.validateState === "error") {
+                this.$refs["loginForm"].validateField(item.labelFor);
+              }
+            });
           });
-        });
+        }
+        if (this.$refs["registerForm"]) {
+          this.$nextTick(() => {
+            this.$refs["registerForm"].fields.forEach(item => {
+              if (item.validateState === "error") {
+                this.$refs["registerForm"].validateField(item.labelFor);
+              }
+            });
+          });
+        }
       }
     }
   }

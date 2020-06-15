@@ -26,11 +26,11 @@ module.exports = {
       // 开发生产共同配置
       resolve: {
         //配置解析别名
-        extension: [".js", ".json", ".vue"],
+        extension: [".js", ".json", ".vue"], //自动添加文件后缀
         alias: {
           "@": path.resolve(__dirname, "./src"),
-          components: path.resolve(__dirname, "./src/components"),
-          common: path.resolve(__dirname, "./src/common")
+          "@components": path.resolve(__dirname, "./src/components"),
+          "@common": path.resolve(__dirname, "./src/common")
         }
       }
     });
@@ -80,6 +80,7 @@ module.exports = {
         }
       }
     },
-    before: app => {}
+    before: app => {
+    }
   }
 };

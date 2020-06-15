@@ -6,8 +6,8 @@ module.exports = {
   resolve: {
     alias: {
       "@": require("path").resolve(__dirname, "src"),
-      "common": require("path").resolve(__dirname, "src/common"),
-      "components": require("path").resolve(__dirname, "src/components")
+      "@common": require("path").resolve(__dirname, "src/common"),
+      "@components": require("path").resolve(__dirname, "src/components")
     }
   }
 };

@@ -24,9 +24,10 @@ Vue.prototype.$rules = rules;
 
 Vue.config.productionTip = false;
 
-new Vue({
+const vue = new Vue({
   router,
   store,
   i18n,
   render: h => h(App)
 }).$mount("#app");
+export default vue;

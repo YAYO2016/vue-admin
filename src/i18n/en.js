@@ -12,10 +12,17 @@ const en = {
     submit: "submit"
   },
   register: {
-    title: "register"
+    title: "register",
+    email: "email",
+    password: "password",
+    repeatPassword: "repeatPassword",
+    code: "code",
+    getCode: "getCode",
+    submit: "submit"
   },
   rules: {
-    noEmpty: "input should not empty"
+    noEmpty: "input should not empty",
+    repeatPasswordError: "Passwords entered twice are inconsistent"
   }
 };
 
