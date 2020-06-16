@@ -71,16 +71,20 @@ module.exports = {
     hotOnly: false,
     proxy: {
       // 配置跨域
-      "/api": {
+      [process.env.VUE_APP_API]: {
         target: "http://localhost:7005/",
         ws: true,
         changOrigin: true,
         pathRewrite: {
-          "^/api": ""
+          ["^" + process.env.VUE_APP_API]: ""
         }
       }
     },
-    before: app => {
-    }
+    overlay: {
+      //全屏模式下是否显示脚本错误
+      warnings: true,
+      errors: true
+    },
+    before: app => {}
   }
 };

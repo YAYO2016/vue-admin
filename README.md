@@ -12,6 +12,13 @@ npm i animate.css -S
 安装vue-i18n,实现国际化
 npm i vue-i18n -S
 
+安装axios@0.18.0
+npm i axios@0.18.0 -S
+
+
+
+
+
 
 
 
