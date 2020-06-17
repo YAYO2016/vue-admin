@@ -1,10 +1,7 @@
 /**
  * Created by yanyue on 2020/6/16 21:47
  */
-import Http from "@/api/config/http.js";
-
-const post = Http.post;
-//const get = Http.get;
+import { post } from "@/api/config/http.js";
 
 const userApi = {
   getUserInfo(params) {

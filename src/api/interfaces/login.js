@@ -2,9 +2,11 @@
  * Created by yanyue on 2020/6/16 21:47
  */
 import { post } from "@/api/config/http.js";
+
+//获取验证码
 const loginApi = {
-  login(params) {
-    return post("/user/login", params);
+  getSms(params) {
+    return post("/getSms", params);
   }
 };
 

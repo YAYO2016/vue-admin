@@ -26,7 +26,7 @@ module.exports = {
       // 开发生产共同配置
       resolve: {
         //配置解析别名
-        extension: [".js", ".json", ".vue"], //自动添加文件后缀
+        extensions: [".js", ".json", ".vue"], //自动添加文件后缀
         alias: {
           "@": path.resolve(__dirname, "./src"),
           "@components": path.resolve(__dirname, "./src/components"),
@@ -66,17 +66,18 @@ module.exports = {
   devServer: {
     open: false, //每次运行自动打开浏览器
     host: "0.0.0.0",
-    port: 3000,
+    port: 8080,
     https: false,
+    hot: true, //开启热加载
     hotOnly: false,
     proxy: {
       // 配置跨域
-      [process.env.VUE_APP_API]: {
-        target: "http://localhost:7005/",
+      [process.env.VUE_APP_API_URL]: {
+        target: "http://www.web-jshtml.cn/productapi",
         ws: true,
         changOrigin: true,
         pathRewrite: {
-          ["^" + process.env.VUE_APP_API]: ""
+          ["^" + process.env.VUE_APP_API_URL]: ""
         }
       }
     },

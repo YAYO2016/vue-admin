@@ -60,7 +60,11 @@
                 ></el-input>
               </el-col>
               <el-col :span="8">
-                <el-button type="success" style="width: 100%">
+                <el-button
+                  type="success"
+                  style="width: 100%"
+                  @click="$api.getSms(loginForm.email)"
+                >
                   {{ $t("login.getCode") }}</el-button
                 >
               </el-col>

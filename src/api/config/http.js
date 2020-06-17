@@ -7,7 +7,7 @@ import _ from "lodash";
 let loadingInstance;
 let loadingCount = 0;
 
-const BASE_URL = process.env.VUE_APP_API;
+const BASE_URL = process.env.VUE_APP_API_URL;
 
 //注意，最新版本的axios无法自定义config的属性值，所以建议安装0.18.0的axios，可以自由添加config的属性值
 // 创建axios实例

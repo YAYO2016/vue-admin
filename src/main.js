@@ -22,6 +22,10 @@ Vue.use(globalFun);
 import rules from "./common/js/rules";
 Vue.prototype.$rules = rules;
 
+//导入api接口
+import api from "./api/index";
+Vue.prototype.$api = api;
+
 Vue.config.productionTip = false;
 
 const vue = new Vue({
